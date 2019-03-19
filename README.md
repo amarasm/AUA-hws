@@ -1,2 +1,2 @@
 # AUA-hws
-This is merely for the homework of my university programming course.
+This is merely for the homeworks of my university's programming course.
