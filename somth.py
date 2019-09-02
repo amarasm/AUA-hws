@@ -1,11 +1,11 @@
 def ArrayRange():
     while True:
         n = input("Please insert the range of your array")
-        if n.isnumeric():
+        if n.isdigit():
             n = int(n)
             break
         else:
-            print("Please insert numbers")
+            print("Please insert integers")
     return n
 
 
@@ -17,17 +17,21 @@ def createASet(n):
             if createSet.isnumeric():
                 createSet = int(createSet)
                 set.append(createSet)
-                print(set)
                 break
             else:
                 print("Please insert numbers")
+    print (set)
+    return set
 
 
 def sum(set):
     sum = 0
+    List = []
     for i in set:
         sum = sum + i
-    return sum
+        List.append(sum)
+    print (List)
+    return List
 
 
 def main():
@@ -36,4 +40,3 @@ def main():
     Sum = sum(CreatedSet)
 
 main()
-
