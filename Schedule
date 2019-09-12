@@ -1,0 +1,96 @@
+class Classroom:
+
+    classrommIDs = []
+
+    def __init__(self, seats, roomID):
+        Classroom.classrommIDs.append(roomID)
+        self.seats = seats
+        self.roomID = roomID
+        self.schedule = []
+
+
+    def classIsFree(self, start, end):
+
+        isFree = True
+        for slot in self.schedule:
+            if (slot["start"] >= start and slot["end"] <= start) or (slot["start"] <= end and slot["end"] <= end):
+                continue
+            else:
+                isFree = False
+                break
+        return isFree
+
+
+
+    def bookClassRoom(self, start, end):
+        if (self.classIsFree(start, end)):
+            Timeslot = {"start":start, "end":end}
+            self.schedule.append(Timeslot)
+            return True
+        else:
+            return False
+
+    @classmethod
+    def chooseClass(cls):
+        while True:
+            whichClass = input("Please choose which class you want. type 1 for 208E PAB, type 2 for 309W PAB or type 3 for 115 MB")
+
+            if whichClass == "1":
+                cl1 = Classroom(100, "208E PAB")
+                whichClass = cl1
+                break
+            elif whichClass == "2":
+                cl2 = Classroom(200, "309W PAB")
+                whichClass = cl2
+                break
+            elif whichClass == "3":
+                cl3 = Classroom(114, "115 MB")
+                whichClass = cl3
+                break
+            else:
+                print("you've chosen a class which doesn't exist choose again")
+        return whichClass
+
+    @classmethod
+    def getAvailableRooms(cls):
+        return str.join(", ", cls.classrommIDs)
+
+
+
+    @staticmethod
+    def ValidSlot(start, end):
+        return start < end
+
+
+def main():
+    cl1 = Classroom(100, "208E PAB")
+    cl2 = Classroom(200, "309W PAB")
+    cl3 = Classroom(114, "115 MB")
+    print("Hello, here you can reserve a class. These are the classes:", Classroom.getAvailableRooms())
+
+
+
+
+    ChosenClass = Classroom.chooseClass()
+
+
+
+    while True:
+        start = int(input("Please enter the start time"))
+        end = int(input("Please enter the end time"))
+
+
+        if (Classroom.ValidSlot(start, end)):
+            if ChosenClass.classIsFree(start, end) == False:
+                print("This classroom is booked for the interval you have entered. Please choose another interval")
+            else:
+                ChosenClass.bookClassRoom(start, end)
+                print("You have reserved", ChosenClass, "class from:", start, "to:", end)
+
+                print(ChosenClass.schedule)
+
+        else:
+            print("The slot is invalid")
+
+
+main()
