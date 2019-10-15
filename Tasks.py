@@ -10,9 +10,17 @@ class Task:
     def returnTask(self):
         return self.task
 
-    def importanceOfTask(self):
+    def importanceArray(self):
         Array = {self.Task: self.importanceLevel}
         self.importance.update(Array)
+        return Array
+
+
+    def importanceOfTask(self):
+        array = [self.importanceLevel]
+        self.importance.update(array)
+        return array
+
 
 class TaskManager:
 
@@ -30,9 +38,9 @@ class TaskManager:
 
     def printTheMostImportantTask(self):
         important = self.new.importance
-        maximumImportance = max(important.items(), key = lambda x : x[1])
-        print("Maximum value in dictionary: ", maximumImportance[1])
-        print("Key with maximum value in dictionary: ", maximumImportance[0])
+        itemMaxValue = max(self.printAllTasks(), important)
+
+        print("Key with maximum value in dictionary: ", itemMaxValue[0])
 
 
 
@@ -47,7 +55,7 @@ def main():
     t = Task("Get ready for Midterms", "26/10/19", 5)
     auaTasks.addTask(t)
 
-    t = Task("Pay cellphone Bil", "22/10/19", 2)
+    t = Task("Pay cellphone Bill", "22/10/19", 2)
     personalTasks.addTask(t)
 
     t = Task("Sister's Birthday gift", "22/10/19", 10)
